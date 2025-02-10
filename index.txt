@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدونة العملات الرقمية</title>
+    <style>
+        body { font-family: Arial, sans-serif; direction: rtl; text-align: right; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background: #333; color: white; padding: 15px; text-align: center; }
+        nav { background: #444; padding: 10px; text-align: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 18px; }
+        .container { width: 80%; margin: auto; overflow: hidden; padding: 20px; background: white; }
+        .post { border-bottom: 1px solid #ddd; padding: 20px 0; }
+        .post h2 { color: #333; }
+        .post p { color: #666; }
+        footer { background: #333; color: white; text-align: center; padding: 15px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>مدونة العملات الرقمية</h1>
+    </header>
+    <nav>
+        <a href="#">الرئيسية</a>
+        <a href="#">حول</a>
+        <a href="#">اتصل بنا</a>
+    </nav>
+    <div class="container">
+        <div class="post">
+            <h2>ما هي العملات الرقمية؟</h2>
+            <p>العملات الرقمية هي شكل من أشكال الأموال الرقمية التي تستخدم تقنية التشفير لتأمين المعاملات والتحكم في إنشاء وحدات جديدة.</p>
+        </div>
+        <div class="post">
+            <h2>أفضل العملات الرقمية للاستثمار</h2>
+            <p>تشمل العملات الرقمية الشهيرة البيتكوين، الإيثريوم، والريبل، ولكل منها مميزاتها واستخداماتها المختلفة في الأسواق المالية.</p>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 جميع الحقوق محفوظة
+    </footer>
+</body>
+</html>
