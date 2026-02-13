@@ -75,7 +75,7 @@
         /* Smooth Transitions */
         #yesBtn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         /* Add transition for No button movement */
-        #noBtn { transition: all 0.2s ease-out; } 
+        #noBtn { transition: all 0.3s ease-out; } 
         
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -99,8 +99,9 @@
         <div id="questionSection">
             <!-- Professional High Quality Gif -->
             <div class="mb-8 flex justify-center">
+                <!-- Main Image: Raw Giphy Link (Most Stable) -->
                 <img id="mainImage" 
-                     src="https://media.tenor.com/f1xnRxTRxLAAAAAj/bears-hug.gif" 
+                     src="https://i.giphy.com/c76IJLufpNwSULPk77.gif" 
                      alt="Cute bear asking" 
                      class="h-48 rounded-2xl image-shadow mix-blend-multiply">
             </div>
@@ -130,9 +131,9 @@
         <!-- PAGE 2: SUCCESS -->
         <div id="successSection" class="hidden">
             <div class="flex justify-center mb-8">
-                <!-- Changed to Dancing Bears GIF -->
-                <img src="https://media.tenor.com/M0t_qQ6xW0cAAAAj/milk-and-mocha-bear-dancing.gif" 
-                     alt="Happy bears dancing" 
+                <!-- Success Image: New Working Link (Happy Dancing Bears) -->
+                <img src="https://i.giphy.com/media/u23zXEvNsIbfO/giphy.gif" 
+                     alt="Happy bears" 
                      class="h-56 rounded-2xl image-shadow mix-blend-multiply">
             </div>
             
@@ -173,44 +174,44 @@
 
             // 1. Make Yes button grow
             const currentFontSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            yesBtn.style.fontSize = `${currentFontSize * 1.4}px`;
+            const yesBtnRect = yesBtn.getBoundingClientRect();
             
-            // Adjust padding to keep it looking good
-            const currentPaddingTop = parseFloat(window.getComputedStyle(yesBtn).paddingTop);
-            const currentPaddingRight = parseFloat(window.getComputedStyle(yesBtn).paddingRight);
-            yesBtn.style.padding = `${currentPaddingTop * 1.1}px ${currentPaddingRight * 1.1}px`;
-
+            // Limit growth to prevent it covering everything immediately
+            if (yesBtnRect.width < window.innerWidth * 0.8) {
+                 yesBtn.style.fontSize = `${currentFontSize * 1.3}px`;
+            }
+            
             // 2. Make No Button Run Away
-            // Change position to fixed so it can move anywhere on screen
             noBtn.style.position = 'fixed';
             
-            // Generate random position within viewport
-            // Subtract button size to prevent it going off screen
-            const maxX = window.innerWidth - noBtn.offsetWidth - 20; 
-            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const padding = 20;
+            const maxX = windowWidth - btnWidth - padding;
+            const maxY = windowHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.random() * maxX);
+            const randomY = Math.max(padding, Math.random() * maxY);
             
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-            
-            // Apply new coordinates
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
 
-            // 3. Change image to sad one temporarily if they press No
+            // 3. Change image to sad one (Raw Giphy Link - Crying Bear)
             if (clickCount === 1) {
-                mainImage.src = "https://media.tenor.com/Eqq2M6j_eQkAAAAj/bear-sad.gif"; // Sad bear
+                mainImage.src = "https://i.giphy.com/media/7SF5scGB2AFrgsXP63/giphy.gif"; 
             }
         }
 
         function handleYesClick() {
             questionSection.classList.add('hidden');
             successSection.classList.remove('hidden');
-            successSection.classList.add('fade-in'); // Add animation to success screen
+            successSection.classList.add('fade-in'); 
             launchConfetti();
         }
 
         function launchConfetti() {
-            // First burst: Big explosion from center
             var count = 400;
             var defaults = {
                 origin: { y: 0.7 }
@@ -228,7 +229,7 @@
             fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
             fire(0.1, { spread: 120, startVelocity: 45 });
 
-            // Second part: Constant rain from top to fill screen
+            // Second part: Constant rain
             var duration = 5 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults2 = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -244,7 +245,6 @@
 
                 var particleCount = 100 * (timeLeft / duration);
                 
-                // Rain from left and right top corners
                 confetti(Object.assign({}, defaults2, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
                 confetti(Object.assign({}, defaults2, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
